@@ -32,7 +32,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full bg-my-orange">
+      <body className="h-full">
         <Header />
         <Outlet />
         <ScrollRestoration />

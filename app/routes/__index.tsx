@@ -2,8 +2,17 @@ import ProductImages from "~/components/ProductImages";
 import MinusIcon from "~/components/Icons/MinusIcon";
 import PlusIcon from "~/components/Icons/PlusIcon";
 import CartIcon from "~/components/Icons/CartIcon";
+import { getProductById } from "~/models/product.server";
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 
+export const loader = async () => {
+  const product = await getProductById(1);
+  return json(product);
+};
 export default function Test() {
+  const data = useLoaderData<typeof loader>();
+  console.log(data);
   return (
     <div className="pb-96">
       <ProductImages />

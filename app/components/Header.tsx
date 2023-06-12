@@ -18,7 +18,7 @@ const Hamburger = ({
   return (
     <button
       onClick={() => setOpen(!isOpen)}
-      className="relative z-10 h-11 w-8 self-center bg-white text-my-very-dark-blue focus:outline-none"
+      className="relative z-20 h-11 w-8 self-center bg-white text-my-very-dark-blue focus:outline-none"
     >
       <span className="sr-only">Open main menu</span>
       <div className="absolute left-1/2 top-1/2 block w-4 -translate-x-1/2 -translate-y-1/2 transform">
@@ -55,7 +55,7 @@ const Thumbnail = () => (
 const Sidebar = () => {
   const links = ["Collections", "Men", "Women", "About", "Contact"];
   return (
-    <div className="fixed bottom-0 left-0 right-0 top-0 bg-black/[.75]">
+    <div className="fixed bottom-0 left-0 right-0 top-0 z-10 bg-black/[.75]">
       <div className="h-screen w-72 bg-my-white pt-20">
         <ul>
           {links.map((link, key) => {

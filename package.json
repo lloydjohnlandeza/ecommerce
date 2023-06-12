@@ -45,6 +45,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/bcryptjs": "^2.4.2",
+    "@types/cypress": "^1.1.3",
     "@types/eslint": "^8.37.0",
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.37",
@@ -80,6 +81,6 @@
     "node": ">=14"
   },
   "prisma": {
-    "seed": "ts-node --require tsconfig-paths/register prisma/seed.ts"
+    "seed": "npx ts-node --require tsconfig-paths/register prisma/seed.ts"
   }
 }

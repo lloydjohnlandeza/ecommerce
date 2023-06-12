@@ -13,7 +13,7 @@ async function seed() {
 
   const hashedPassword = await bcrypt.hash("racheliscool", 10);
 
-  const user = await prisma.user.create({
+  await prisma.user.create({
     data: {
       email,
       password: {
@@ -24,22 +24,28 @@ async function seed() {
     },
   });
 
-  await prisma.note.create({
+  const product = await prisma.product.create({
     data: {
-      title: "My first note",
-      body: "Hello, world!",
-      userId: user.id,
-    },
-  });
-
-  await prisma.note.create({
+      title: 'Fall Limited Edition Sneakers',
+      description: 'These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they\'ll withstand everything the weather can offer.',
+      price: 125.00,
+      discount: .5,
+      inventory: 999
+    }
+  })
+  const image = await prisma.image.create({
     data: {
-      title: "My second note",
-      body: "Hello, world!",
-      userId: user.id,
-    },
-  });
-
+      url: 'image-product-1.jpg',
+      thumb: 'image-product-1-thumbnail.jpg',
+      alt: 'product image',
+    }
+  })
+  await prisma.productImages.create({
+    data: {
+      productId: product.id,
+      imageId: image.id
+    }
+  })
   console.log(`Database has been seeded. 🌱`);
 }
 

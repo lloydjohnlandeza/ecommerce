@@ -3,6 +3,13 @@ import CartIcon from "./Icons/CartIcon";
 import productThumbnail from "~/images/image-product-1-thumbnail.jpg";
 import { useState } from "react";
 import classNames from "classnames";
+import { getUserCart } from "~/models/cart.server";
+import { useUser } from "~/utils";
+import type { User, Cart } from "@prisma/client";
+import { LoaderArgs, json } from "@remix-run/node";
+import { requireUserId } from "~/session.server";
+import { useLoaderData, useRouteLoaderData } from "@remix-run/react";
+
 const CheckoutButton = () => {
   return (
     <button className="mx-auto mt-5 w-full rounded-md bg-my-orange py-4 text-my-white">
@@ -10,9 +17,10 @@ const CheckoutButton = () => {
     </button>
   );
 };
-const CartDropdown = ({ cart = true }) => {
+const CartDropdown = ({ cart, user }: { cart: Cart; user: User }) => {
+  console.log(cart, user);
   return (
-    <div className="fixed left-0 right-0 top-24 mx-auto max-w-[360px] rounded-md bg-my-white py-6  shadow-xl">
+    <div className="fixed left-0 right-0 top-24 z-30 mx-auto max-w-[360px] rounded-md bg-my-white py-6  shadow-xl">
       <h4 className="mb-4 border-b border-my-grayish-blue px-4 pb-4 font-bold">
         Cart
       </h4>
@@ -63,13 +71,17 @@ export default function HeaderCart() {
     "text-my-dark-grayish-blue hover:text-my-very-dark-blue": true,
     "text-my-very-dark-blue": isOpen,
   });
+  const cart = useRouteLoaderData("routes/product");
+
+  console.log(cart);
+
   return (
     <div className="relative mr-4 flex flex-1 justify-end self-center">
       <button onClick={() => setOpen(!isOpen)} className={cartBtnClassName}>
         <CartIcon />
       </button>
       <CartItems />
-      {isOpen && <CartDropdown />}
+      {isOpen && <CartDropdown cart={cart} />}
     </div>
   );
 }
